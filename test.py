@@ -31,7 +31,7 @@ if __name__ == "__main__":
     )
 
     datamodule = TinyImageNetDatasetModule(
-        batch_size = 1,
+        batch_size = cfg.BATCH_SIZE,
     )
 
     trainer = Trainer(
