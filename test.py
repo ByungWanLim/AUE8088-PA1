@@ -29,9 +29,10 @@ if __name__ == "__main__":
         model_name = cfg.MODEL_NAME,
         num_classes = cfg.NUM_CLASSES,
     )
-
+    
     datamodule = TinyImageNetDatasetModule(
         batch_size = cfg.BATCH_SIZE,
+        # batch_size = 1,
     )
 
     trainer = Trainer(
@@ -43,11 +44,20 @@ if __name__ == "__main__":
         logger = False,
     )
 
+    print(f'model_name: {cfg.MODEL_NAME}')
+    print(f'Batch size: {cfg.BATCH_SIZE}')
+    print(f'params: {sum(p.numel() for p in model.parameters())}')
+    
     trainer.validate(model, ckpt_path = args.ckpt_file, datamodule = datamodule)
 
     # FLOP counter
     x, y = next(iter(datamodule.test_dataloader()))
     flop_counter = FlopCounterMode(model, depth=1)
+    
+    print(f'model_name: {cfg.MODEL_NAME}')
+    print(f'Batch size: {cfg.BATCH_SIZE}')
+    print(f'params: {sum(p.numel() for p in model.parameters())}')
+
 
     with flop_counter:
         model(x)
