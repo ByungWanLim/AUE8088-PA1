@@ -5,7 +5,7 @@
 """
 # PyTorch & Pytorch Lightning
 from lightning.pytorch.loggers.wandb import WandbLogger
-from lightning.pytorch.callbacks import LearningRateMonitor, ModelCheckpoint
+from lightning.pytorch.callbacks import LearningRateMonitor, ModelCheckpoint, EarlyStopping
 from lightning import Trainer
 import torch
 
@@ -47,6 +47,7 @@ if __name__ == "__main__":
         callbacks = [
             LearningRateMonitor(logging_interval='epoch'),
             ModelCheckpoint(save_top_k=1, monitor='accuracy/val', mode='max'),
+            # EarlyStopping(monitor='accuracy/val', patience=10, mode='max'),
         ],
     )
 

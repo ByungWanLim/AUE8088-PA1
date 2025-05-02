@@ -24,6 +24,9 @@ if __name__ == "__main__":
         type = str,
         help = 'Model checkpoint file name')
     args = args.parse_args()
+    
+    ckpt_path = args.ckpt_file
+    print(f'ckpt_path: {ckpt_path}')
 
     model = SimpleClassifier(
         model_name = cfg.MODEL_NAME,

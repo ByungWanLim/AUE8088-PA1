@@ -44,7 +44,9 @@ class TinyImageNetDatasetModule(LightningDataModule):
             transforms.RandomRotation(cfg.IMAGE_ROTATION),
             transforms.RandomHorizontalFlip(cfg.IMAGE_FLIP_PROB),
             transforms.RandomCrop(cfg.IMAGE_NUM_CROPS, padding=cfg.IMAGE_PAD_CROPS),
+            # transforms.ColorJitter(*cfg.COLOR_JITTER),
             transforms.ToTensor(),
+            # transforms.RandomErasing(p=cfg.RANDOM_ERASE_PROB),
             transforms.Normalize(cfg.IMAGE_MEAN, cfg.IMAGE_STD),
         ])
         dataset = ImageFolder(os.path.join(cfg.DATASET_ROOT_PATH, self.__DATASET_NAME__, 'train'), tf_train)
